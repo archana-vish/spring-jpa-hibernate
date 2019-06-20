@@ -40,6 +40,8 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 
 		//logger.info("Delete 10001")
 		personJPARepository.findAndDeleteById(10002);
+
+		logger.info("FindAll {} " , personJPARepository.findAll());
 	}
 
 

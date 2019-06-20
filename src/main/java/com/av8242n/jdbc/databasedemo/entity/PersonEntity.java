@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="person")
+@NamedQuery(name="find_all_person", query="select p from PersonEntity p")
 public class PersonEntity {
 
     @Id

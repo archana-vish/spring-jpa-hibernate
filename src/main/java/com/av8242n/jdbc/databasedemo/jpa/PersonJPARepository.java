@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -36,5 +38,12 @@ public class PersonJPARepository {
     public void findAndDeleteById(int id) {
         PersonEntity person = entityManager.find(PersonEntity.class, id);
         entityManager.remove(person);
+    }
+
+    // findAll using JPQL
+    public List<PersonEntity> findAll() {
+        TypedQuery<PersonEntity> namedQuery = entityManager.createNamedQuery("find_all_person", PersonEntity.class);
+        List<PersonEntity> personList = namedQuery.getResultList();
+        return personList;
     }
 }
