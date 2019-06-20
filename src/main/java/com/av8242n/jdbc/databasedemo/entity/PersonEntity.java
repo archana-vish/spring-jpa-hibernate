@@ -57,7 +57,15 @@ public class PersonEntity {
     public PersonEntity() {
     }
 
+    public PersonEntity(int id, String name, String location, Date birthDate) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.birthDate = birthDate;
+    }
+
     public PersonEntity(String name, String location, Date birthDate) {
+        this.id = id;
         this.name = name;
         this.location = location;
         this.birthDate = birthDate;

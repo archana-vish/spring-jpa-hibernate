@@ -23,4 +23,11 @@ public class PersonJPARepository {
     public PersonEntity findById(int id) {
        return entityManager.find(PersonEntity.class, id);
     }
+
+    // Merge -> to insert and update
+    // Checks if the id is present, if yes, update
+    // if no then update
+    public PersonEntity ifPresentThenInsertElseUpdate(PersonEntity person) {
+        return entityManager.merge(person);
+    }
 }

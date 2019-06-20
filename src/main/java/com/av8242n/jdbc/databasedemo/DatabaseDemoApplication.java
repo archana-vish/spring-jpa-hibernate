@@ -1,6 +1,7 @@
 package com.av8242n.jdbc.databasedemo;
 
 import com.av8242n.jdbc.databasedemo.entity.Person;
+import com.av8242n.jdbc.databasedemo.entity.PersonEntity;
 import com.av8242n.jdbc.databasedemo.jdbc.PersonDAOJdbc;
 import com.av8242n.jdbc.databasedemo.jpa.PersonJPARepository;
 import org.slf4j.Logger;
@@ -31,6 +32,11 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		logger.info("Find person with id 10001 {} ", personJPARepository.findById(10001));
+
+		PersonEntity person = new PersonEntity("sven", "carrotLand", new Date());
+		logger.info("Inserting {} " , personJPARepository.ifPresentThenInsertElseUpdate(person));
+		person = new PersonEntity(10003, "sven", "carrotyLand", new Date());
+		logger.info("Update {} " , personJPARepository.ifPresentThenInsertElseUpdate(person));
 	}
 
 
