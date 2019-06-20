@@ -26,6 +26,7 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 		logger.info("Person findAll ::  {} ", personDAOJdbc.findAll());
 		logger.info("Person by Id   ::  {} ", personDAOJdbc.findById(10001));
 		logger.info("Person by loc  ::  {} ", personDAOJdbc.findByLocation("london"));
+		logger.info("Delete by Id   ::  {} ", personDAOJdbc.deleteById(10002));
 	}
 
 
