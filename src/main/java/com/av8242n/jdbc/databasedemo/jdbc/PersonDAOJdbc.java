@@ -16,6 +16,19 @@ public class PersonDAOJdbc {
 
     // select * from person;
     public List<Person> findAll() {
-        return jdbcTemplate.query("select * from person", new BeanPropertyRowMapper(Person.class));
+        return jdbcTemplate.query("select * from person", new BeanPropertyRowMapper<>(Person.class));
+    }
+
+
+    // select * from person where id = ?;
+    public Person findById(int id) {
+        return jdbcTemplate.queryForObject("select * from person where id = ?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class));
+    }
+
+    // select * from person where location = ?;
+    public Person findByLocation(String location) {
+        return jdbcTemplate.queryForObject("select * from person where location = ?",
+                new Object[]{location}, new BeanPropertyRowMapper<>(Person.class));
     }
 }

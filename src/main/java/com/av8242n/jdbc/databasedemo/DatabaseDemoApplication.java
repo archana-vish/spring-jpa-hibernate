@@ -24,5 +24,9 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info("Person findAll ::  {} ", personDAOJdbc.findAll());
+		logger.info("Person by Id   ::  {} ", personDAOJdbc.findById(10001));
+		logger.info("Person by loc  ::  {} ", personDAOJdbc.findByLocation("london"));
 	}
+
+
 }
