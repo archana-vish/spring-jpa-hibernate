@@ -6,6 +6,7 @@ package com.av8242n.jdbc.databasedemo.jdbc;
         import org.springframework.jdbc.core.JdbcTemplate;
         import org.springframework.stereotype.Repository;
 
+        import java.sql.Timestamp;
         import java.util.List;
 
 @Repository
@@ -36,5 +37,22 @@ public class PersonDAOJdbc {
     public int deleteById(int id) {
         return jdbcTemplate.update("delete from person where id = ?",
                 new Object[]{id});
+    }
+
+    // insert
+    public int insert(Person person) {
+        return jdbcTemplate.update(
+                "insert into PERSON (id, name, location, birth_date) " +
+                        "values (?, ?,?,?)",
+                new Object[]{person.getId(), person.getName(), person.getLocation(),
+                        new Timestamp(person.getBirthDate().getTime())});
+    }
+
+    // update
+    public int update(int id, Person person) {
+        return jdbcTemplate.update(
+                "update  PERSON set " +
+                        " name = ?, location = ?, birth_date = ?  where id = ?",
+                new Object[]{person.getName(), person.getLocation(), person.getBirthDate(), id});
     }
 }
