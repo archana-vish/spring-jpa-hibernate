@@ -37,6 +37,9 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 		logger.info("Inserting {} " , personJPARepository.ifPresentThenInsertElseUpdate(person));
 		person = new PersonEntity(10003, "sven", "carrotyLand", new Date());
 		logger.info("Update {} " , personJPARepository.ifPresentThenInsertElseUpdate(person));
+
+		//logger.info("Delete 10001")
+		personJPARepository.findAndDeleteById(10002);
 	}
 
 

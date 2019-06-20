@@ -30,4 +30,11 @@ public class PersonJPARepository {
     public PersonEntity ifPresentThenInsertElseUpdate(PersonEntity person) {
         return entityManager.merge(person);
     }
+
+
+    // find and if found delete
+    public void findAndDeleteById(int id) {
+        PersonEntity person = entityManager.find(PersonEntity.class, id);
+        entityManager.remove(person);
+    }
 }
