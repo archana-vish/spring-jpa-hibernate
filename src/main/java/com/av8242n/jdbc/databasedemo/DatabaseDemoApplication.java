@@ -9,6 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @SpringBootApplication
@@ -34,6 +36,8 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 		Person person = new Person(10005, "sven", "carrotLand", new Date());
 		logger.info("Inserting {} " , personDAOJdbc.insert(person));
 		logger.info("Update {} " , personDAOJdbc.update(10003, person));
+
+
 
 	}
 

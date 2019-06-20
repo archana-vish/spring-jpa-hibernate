@@ -4,8 +4,11 @@ package com.av8242n.jdbc.databasedemo.jdbc;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.jdbc.core.BeanPropertyRowMapper;
         import org.springframework.jdbc.core.JdbcTemplate;
+        import org.springframework.jdbc.core.RowMapper;
         import org.springframework.stereotype.Repository;
 
+        import java.sql.ResultSet;
+        import java.sql.SQLException;
         import java.sql.Timestamp;
         import java.util.List;
 
@@ -15,22 +18,36 @@ public class PersonDAOJdbc {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+
+    class PersonRowMapper implements RowMapper<Person> {
+
+        @Override
+        public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Person person = new Person();
+            person.setId(rs.getInt("id"));
+            person.setName(rs.getString("name"));
+            person.setLocation(rs.getString("location"));
+            person.setBirthDate(rs.getTimestamp("birth_date"));
+            return person;
+        }
+    }
+
     // select * from person;
     public List<Person> findAll() {
-        return jdbcTemplate.query("select * from person", new BeanPropertyRowMapper<>(Person.class));
+        return jdbcTemplate.query("select * from person", new PersonRowMapper());
     }
 
 
     // select * from person where id = ?;
     public Person findById(int id) {
         return jdbcTemplate.queryForObject("select * from person where id = ?",
-                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class));
+                new Object[]{id}, new PersonRowMapper());
     }
 
     // select * from person where location = ?;
     public Person findByLocation(String location) {
         return jdbcTemplate.queryForObject("select * from person where location = ?",
-                new Object[]{location}, new BeanPropertyRowMapper<>(Person.class));
+                new Object[]{location}, new PersonRowMapper());
     }
 
     // delete from person where id = ?;
